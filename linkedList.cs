@@ -9,13 +9,14 @@ namespace LinkedList
     internal class linkedList
     {
 
-        internal Node head;
-        public void add(int data)
+        public Node head;
+
+        public void Add(int data)
         {
-            Node node = new Node(data);
-            if (head == null)
+            Node objNode = new Node(data);
+            if (this.head == null)
             {
-                head = node;
+                this.head = objNode;
             }
             else
             {
@@ -24,109 +25,112 @@ namespace LinkedList
                 {
                     temp = temp.next;
                 }
-                temp.next = node;
+                temp.next = objNode;
             }
-            Console.WriteLine("Insertes element = " + node.data);
+            Console.WriteLine($"\n{objNode.data} inserted into Linked List");
         }
 
-        public void display()
+        public void InsertBetween(int new_data)
         {
-            Node temp = this.head;
-            if (temp == null)
-            {
-                Console.WriteLine("Linked List is Empty");
-                return;
-            }
-            while (temp != null)
-            {
-                Console.WriteLine(temp.data + " ");
-                temp = temp.next;
-            }
-        }
+            int position = 3;
+            Node objnew_Node = new Node(new_data);
+            objnew_Node.data = new_data;
+            objnew_Node.next = null;
 
-        internal Node InsertAtParticularPosition(int position, int data)
-        {
             if (position < 1)
             {
-                Console.WriteLine("Invalid Position");
+                Console.Write("\nPosition should be >= 1");
             }
-            if (position == 1)
+            else if (position == 1)
             {
-                Node newNode = new Node(data);
-                newNode.next = head;
-                head = newNode;
+                objnew_Node.next = this.head;
+                this.head = objnew_Node;
             }
             else
             {
-                while (position-- != 0)
+                Node temp = new Node(new_data);
+                temp = this.head;
+                for (int i = 1; i < position - 1; i++)
                 {
-                    if (position == 1)
+                    if (temp != null)
                     {
-                        var node = new Node(data);
-                        node.next = head.next;
-                        head.next = node;
-                        break;
+                        temp = temp.next;
                     }
-                    head = head.next;
                 }
-                if (position != 1)
-                    Console.WriteLine("Position out of range");
+                if (temp != null)
+                {
+                    objnew_Node.next = temp.next;
+                    temp.next = objnew_Node;
+                }
+                else
+                {
+                    Console.Write("\nThe previous node is null.");
+                }
             }
-            Console.WriteLine();
-            Console.WriteLine("Inserted value is : " + data);
-            return head;
+            Console.WriteLine($"\n{objnew_Node.data} inserted at position {position}");
         }
 
-        internal Node RemoveFirstNode()
+        public void RemoveFirstNode()
         {
-            Console.WriteLine("Deleting first Element : ");
-            if (head == null)
+            if (this.head == null)
             {
-                return null;
+                Console.WriteLine("\nList is Empty");
             }
-            head = head.next;
-            return head;
+            this.head = this.head.next;
+            Console.WriteLine("\nRemoved first node");
         }
 
-        internal Node RemoveLastNode()
+        public void RemoveLastNode()
         {
-            Console.WriteLine("Deleted last Element : ");
-
             if (head == null)
             {
-                return null;
+                Console.WriteLine("\nLinked List Empty");
             }
             if (head.next == null)
             {
-                return null;
+                Console.WriteLine("\nLinked List Empty");
             }
-            Node newNode = head;
-            while (newNode.next.next != null)
+            Node objNew_Node = head;
+            while (objNew_Node.next.next != null)
             {
-                newNode = newNode.next;
+                objNew_Node = objNew_Node.next;
             }
-            newNode.next = null;
-            return head;
+            objNew_Node.next = null;
+            Console.WriteLine("\nRemoved Last Node");
         }
 
-        internal Node SearchNode(int value)
+        public Node Search(int value)
         {
-            int Count = 1;
-            while (head != null)
+            int position = 1;
+            Node headValue = this.head;
+            while (headValue != null)
             {
-                if (head.data == value)
+                if (headValue.data == value)
                 {
-
-                    Console.WriteLine($"\nThe {value} is at Node : " + Count);
-
-                    return head;
+                    Console.WriteLine($"\nInput {value} is at {position}");
+                    return headValue;
                 }
-                head = head.next;
-                Count++;
+                position++;
+                headValue = headValue.next;
             }
             return null;
         }
 
+        public void Display()
+        {
+            Node temp = this.head;
+            if (temp == null)
+            {
+                Console.WriteLine("\nLinkedList is empty");
+                return;
+            }
+            Console.Write("\nLinked List => ");
+            while (temp != null)
+            {
+                Console.Write(temp.data + " ");
+                temp = temp.next;
+            }
+        }
 
     }
 }
