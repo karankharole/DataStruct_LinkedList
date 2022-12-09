@@ -10,6 +10,7 @@ namespace LinkedList
     {
 
         public Node head;
+        int position = 0;
 
         public void Add(int data)
         {
@@ -32,7 +33,7 @@ namespace LinkedList
 
         public void InsertBetween(int new_data)
         {
-            int position = 3;
+            position = 3;
             Node objnew_Node = new Node(new_data);
             objnew_Node.data = new_data;
             objnew_Node.next = null;
@@ -75,6 +76,7 @@ namespace LinkedList
             if (this.head == null)
             {
                 Console.WriteLine("\nList is Empty");
+                return;
             }
             this.head = this.head.next;
             Console.WriteLine("\nRemoved first node");
@@ -85,10 +87,12 @@ namespace LinkedList
             if (head == null)
             {
                 Console.WriteLine("\nLinked List Empty");
+                return;
             }
             if (head.next == null)
             {
-                Console.WriteLine("\nLinked List Empty");
+                Console.WriteLine("\nLinked List contains only 1 element");
+                return;
             }
             Node objNew_Node = head;
             while (objNew_Node.next.next != null)
@@ -99,15 +103,51 @@ namespace LinkedList
             Console.WriteLine("\nRemoved Last Node");
         }
 
+        public void RemoveAtPosition(int position)
+        {
+            if (position < 1)
+            {
+                Console.Write("\nPosition should be >= 1");
+            }
+            else if (position == 1 && head != null)
+            {
+                Node nodeToDelete = head;
+                head = head.next;
+                nodeToDelete = null;
+            }
+            else
+            {
+                Node temp = new Node(position);
+                temp = head;
+                for (int i = 1; i < position - 1; i++)
+                {
+                    if (temp != null)
+                    {
+                        temp = temp.next;
+                    }
+                }
+                if (temp != null && temp.next != null)
+                {
+                    Node nodeToDelete = temp.next;
+                    temp.next = temp.next.next;
+                    nodeToDelete = null;
+                }
+                else
+                {
+                    Console.Write("\nThe node is already null");
+                }
+            }
+        }
+
         public Node Search(int value)
         {
-            int position = 1;
+            position = 1;
             Node headValue = this.head;
             while (headValue != null)
             {
                 if (headValue.data == value)
                 {
-                    Console.WriteLine($"\nInput {value} is at {position}");
+                    Console.WriteLine($"\nInput {value} is at position {position}");
                     return headValue;
                 }
                 position++;
@@ -131,6 +171,5 @@ namespace LinkedList
                 temp = temp.next;
             }
         }
-
     }
 }
