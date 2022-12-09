@@ -8,9 +8,9 @@
             l_Object.Add(56);
             l_Object.Add(36);
             l_Object.Add(70);
-            l_Object.RemoveAtPosition(3);
             l_Object.Display();
-
+            l_Object.sortList();
+            l_Object.Display();
             Console.ReadLine();
         }
     }
