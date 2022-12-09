@@ -9,7 +9,6 @@ namespace LinkedList
     internal class linkedList
     {
 
-
         internal Node head;
         public void add(int data)
         {
@@ -75,6 +74,17 @@ namespace LinkedList
             }
             Console.WriteLine();
             Console.WriteLine("Inserted value is : " + data);
+            return head;
+        }
+
+        internal Node RemoveFirstNode()
+        {
+            Console.WriteLine("Deleting first Element : ");
+            if (head == null)
+            {
+                return null;
+            }
+            head = head.next;
             return head;
         }
     }

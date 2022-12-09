@@ -10,6 +10,8 @@
             l_Object.display();
             l_Object.InsertAtParticularPosition(2, 30);
             l_Object.display();
+            l_Object.RemoveFirstNode();
+            l_Object.display();
         }
     }
 }
