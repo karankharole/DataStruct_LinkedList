@@ -9,6 +9,7 @@ namespace LinkedList
     internal class linkedList
     {
 
+
         internal Node head;
         public void add(int data)
         {
@@ -46,29 +47,35 @@ namespace LinkedList
 
         internal Node InsertAtParticularPosition(int position, int data)
         {
-            Node newestNode = new Node(data);
-            if (this.head == null)
+            if (position < 1)
             {
-                return newestNode;
+                Console.WriteLine("Invalid Position");
             }
-            if (position == 0)
+            if (position == 1)
             {
-                newestNode.next = this.head;
-                this.head = newestNode;
-                return this.head;
+                Node newNode = new Node(data);
+                newNode.next = head;
+                head = newNode;
             }
-            Node prev = null;
-            Node current = this.head;
-            int count = 0;
-            while (current != null && count < position)
+            else
             {
-                prev = current;
-                current = current.next;
-                count++;
+                while (position-- != 0)
+                {
+                    if (position == 1)
+                    {
+                        var node = new Node(data);
+                        node.next = head.next;
+                        head.next = node;
+                        break;
+                    }
+                    head = head.next;
+                }
+                if (position != 1)
+                    Console.WriteLine("Position out of range");
             }
-            newestNode.next = prev.next;
-            prev.next = newestNode;
-            return this.head;
+            Console.WriteLine();
+            Console.WriteLine("Inserted value is : " + data);
+            return head;
         }
     }
 }
